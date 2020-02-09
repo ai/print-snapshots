@@ -1,5 +1,5 @@
 {
-  "name": "print-shapshots",
+  "name": "print-snapshots",
   "version": "0.0.0",
   "description": "Print Jest snapshots to check CLI output of your tool",
   "keywords": [
@@ -20,7 +20,7 @@
   },
   "author": "Andrey Sitnik <andrey@sitnik.ru>",
   "license": "MIT",
-  "repository": "ai/print-shapshots",
+  "repository": "ai/print-snapshots",
   "devDependencies": {
     "@logux/eslint-config": "^36.0.0",
     "clean-publish": "^1.1.4",
@@ -57,7 +57,8 @@
       " \\(by [^)]+\\)."
     ],
     "dictionary": [
-      "Versioning"
+      "Versioning",
+      "CLI"
     ]
   }
 }
