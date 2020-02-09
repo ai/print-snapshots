@@ -8,7 +8,7 @@ You can see CLI output of your app in all different states.
   <img src="./screenshot.png" alt="Print Snapshots example" width="786">
 </p>
 
-<a href="https://evilmartians.com/?utm_source=print-snapshots">
+<a href="https://evilmartians.com/?utm_source=print-snapshots" align="center">
   <img src="https://evilmartians.com/badges/sponsored-by-evil-martians.svg"
        alt="Sponsored by Evil Martians" width="236" height="54">
 </a>
