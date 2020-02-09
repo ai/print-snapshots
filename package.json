@@ -1,8 +1,11 @@
 {
   "name": "print-shapshots",
   "version": "0.0.0",
-  "description": "",
+  "description": "Print Jest snapshots to check CLI output of your tool",
   "keywords": [
+    "jest",
+    "snapshots",
+    "cli"
   ],
   "bin": "./bin.js",
   "engines": {
