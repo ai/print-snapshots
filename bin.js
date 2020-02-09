@@ -2,6 +2,7 @@
 
 let chalk = require('chalk')
 
+let showSnapshots = require('./show-snapshots')
 let showVersion = require('./show-version')
 let showHelp = require('./show-help')
 
@@ -23,10 +24,16 @@ async function run () {
     error(`Unknown argument ${ arg }\n`)
     showHelp(print)
     process.exit(1)
+  } else {
+    await showSnapshots(print, process.cwd(), arg)
   }
 }
 
 run().catch(e => {
-  error(e.stack)
+  if (e.own) {
+    error(e.message)
+  } else {
+    error(e.stack)
+  }
   process.exit(1)
 })
