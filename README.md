@@ -1,6 +1,6 @@
 # Print Snapshots
 
-Print Jest snapshots from your project. It is like “storybook” for CLI tools.
+Print Jest snapshots from your project: “storybook” for CLI tools.
 
 You can see CLI output of your app in all different states.
 
