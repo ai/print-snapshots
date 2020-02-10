@@ -41,7 +41,7 @@ module.exports = async function showSnapshots (print, cwd, filter) {
           title = title.replace(/ 1$/, '')
         }
         print(chalk.gray(`${ title }:`))
-        print(body.replace(/\\\\"/g, '"'))
+        print(body.replace(/\\`/g, '`'))
       })
   })
 }
