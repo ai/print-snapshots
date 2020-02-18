@@ -24,16 +24,27 @@ module.exports = async function showSnapshots (print, cwd, filter) {
   }))
 
   snaps.sort().reverse().forEach(file => {
+    let testExt
+    let fileExt
     let test = file
-      .replace(/\.test\.js\.snap$/, '')
+      .replace(
+        /(\.(spec|test))?(\.([jt]sx?))\.snap$/,
+        (match, p1, p2, p3) => {
+          testExt = p1
+          fileExt = p3
+          return ''
+        }
+      )
       .replace('__snapshots__' + sep, '')
     results[file].split('exports[`')
       .filter(str => !str.startsWith('// '))
       .filter(str => !filter || str.includes(filter))
       .forEach(str => {
         if (str.trim().length === 0) return
-        let [name, body] = str.replace(/"\s*`;\s*$/, '').split(/`] = `\s*"?/)
-        let title = `${ test }.test.js ${ name }`
+        let [name, body] = str
+          .replace(/"\s*`;\s*$/, '')
+          .split(/`] = `\s*"?/)
+        let title = `${ test }${ testExt || '' }${ fileExt } ${ name }`
         if (test === 'create-reporter') {
           if (body[0] === '{') return
           title = title.replace(/ 2$/, '')
