@@ -1,6 +1,9 @@
 # Change Log
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## 0.1.4
+* Fix snapshots loading for test names with `spec` and `jsx` (by Oleg Levshin).
+
 ## 0.1.3
 * Fix snapshots loading (by Oleg Levshin).
 * Add project description to `--help`.
