@@ -6,6 +6,7 @@ let showSnapshots = require('./show-snapshots')
 let showVersion = require('./show-version')
 let showHelp = require('./show-help')
 let updateSnapshots = require('./update-snapshots')
+let watchAndUpdateSnaphots = require('./watch-and-update-snapshots')
 
 function error (message) {
   process.stderr.write(chalk.red(message) + '\n')
@@ -22,7 +23,9 @@ async function run () {
   } else if (arg === '--help') {
     showHelp(print)
   } else if (arg === '--update') {
-    updateSnapshots(process.cwd())
+    await updateSnapshots(process.cwd())
+  } else if (arg === '--watch') {
+    await watchAndUpdateSnaphots(process.cwd())
   } else if (arg.startsWith('--')) {
     error(`Unknown argument ${ arg }\n`)
     showHelp(print)
