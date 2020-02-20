@@ -24,32 +24,19 @@ async function run () {
 
   if (arg === '--version') {
     showVersion(print)
-    return
-  }
-
-  if (arg === '--help') {
+  } else if (arg === '--help') {
     showHelp(print)
-    return
-  }
-
-  if (arg === '--update') {
+  } else if (arg === '--update') {
     await updateAndShowSnaphots(print, cwd, filter)
-    return
-  }
-
-  if (arg === '--watch') {
-    (await watchAndShowSnaphots(print, cwd, filter))
-      .on('error', err => error(err.stack || err))
-    return
-  }
-
-  if (arg.startsWith('--')) {
+  } else if (arg === '--watch') {
+    await watchAndShowSnaphots(print, error, cwd, filter)
+  } else if (arg.startsWith('--')) {
     error(`Unknown argument ${ arg }\n`)
     showHelp(print)
     process.exit(1)
+  } else {
+    await showSnapshots(print, cwd, arg)
   }
-
-  await showSnapshots(print, cwd, arg)
 }
 
 run().catch(e => {

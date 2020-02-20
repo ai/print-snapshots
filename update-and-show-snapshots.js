@@ -6,13 +6,12 @@ let showSnapshots = require('./show-snapshots')
 async function updateAndShowSnaphots (print, cwd, filter) {
   print(chalk.blue('\nUpdating snapshots... \n'))
 
-  let spawned = spawn('npx', ['jest', '-u'], {
+  let spawned = spawn('npx', ['jest', '--no-install', '-u'], {
     cwd, stdio: 'inherit'
   })
 
   spawned.on('exit', async () => {
-    print(chalk.green('\nSnapshots updated! \n'))
-
+    print('\n')
     await showSnapshots(print, cwd, filter)
   })
 }
