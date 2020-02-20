@@ -1,24 +1,20 @@
-let { exec } = require('child_process')
-let { promisify } = require('util')
+let { spawn } = require('child_process')
 let chalk = require('chalk')
 
 let showSnapshots = require('./show-snapshots')
 
-let execCommand = promisify(exec)
-
-async function updateAndShowSnaphots (print, error, cwd, filter) {
+async function updateAndShowSnaphots (print, cwd, filter) {
   print(chalk.blue('\nUpdating snapshots... \n'))
 
-  let { stdout, stderr } = await execCommand('"./node_modules/.bin/jest" -u', {
-    cwd
+  let spawned = spawn('npx', ['jest', '-u'], {
+    cwd, stdio: 'inherit'
   })
 
-  print(chalk.grey(stdout))
-  error(stderr)
+  spawned.on('exit', async () => {
+    print(chalk.green('\nSnapshots updated! \n'))
 
-  print(chalk.green('Snapshots updated! \n'))
-
-  await showSnapshots(print, cwd, filter)
+    await showSnapshots(print, cwd, filter)
+  })
 }
 
 module.exports = updateAndShowSnaphots

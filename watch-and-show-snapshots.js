@@ -4,7 +4,7 @@ let parseGitignore = require('parse-gitignore')
 
 let updateAndShowSnaphots = require('./update-and-show-snapshots')
 
-async function watchAndShowSnaphots (print, error, cwd, filter) {
+async function watchAndShowSnaphots (print, cwd, filter) {
   let ignored = ['.git', 'node_modules']
 
   if (fs.existsSync(`${ cwd }/.gitignore`)) {
@@ -22,7 +22,7 @@ async function watchAndShowSnaphots (print, error, cwd, filter) {
 
   return watcher
     .on('change', async () => {
-      await updateAndShowSnaphots(print, error, cwd, filter)
+      await updateAndShowSnaphots(print, cwd, filter)
     })
 }
 

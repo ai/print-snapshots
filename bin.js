@@ -33,12 +33,12 @@ async function run () {
   }
 
   if (arg === '--update') {
-    await updateAndShowSnaphots(print, error, cwd, filter)
+    await updateAndShowSnaphots(print, cwd, filter)
     return
   }
 
   if (arg === '--watch') {
-    (await watchAndShowSnaphots(print, error, cwd, filter))
+    (await watchAndShowSnaphots(print, cwd, filter))
       .on('error', err => error(err.stack || err))
     return
   }
