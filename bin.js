@@ -33,7 +33,7 @@ async function run () {
   }
 
   if (arg === '--update') {
-    await showSnapshots(print, cwd, filter)
+    await updateAndShowSnaphots(print, cwd, filter)
     return
   }
 
@@ -49,7 +49,7 @@ async function run () {
     process.exit(1)
   }
 
-  await updateAndShowSnaphots(print, cwd, arg)
+  await showSnapshots(print, cwd, arg)
 }
 
 run().catch(e => {
