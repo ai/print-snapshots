@@ -6,14 +6,19 @@ let showSnapshots = require('./show-snapshots')
 
 let execCommand = promisify(exec)
 
-module.exports = async function updateAndShowSnaphots (print, cwd, filter) {
-  print(chalk.blue('Updating snapshots... \n'))
+async function updateAndShowSnaphots (print, error, cwd, filter) {
+  print(chalk.blue('\nUpdating snapshots... \n'))
 
-  await execCommand('"./node_modules/.bin/jest" -u', {
+  let { stdout, stderr } = await execCommand('"./node_modules/.bin/jest" -u', {
     cwd
   })
+
+  print(chalk.grey(stdout))
+  error(stderr)
 
   print(chalk.green('Snapshots updated! \n'))
 
   await showSnapshots(print, cwd, filter)
 }
+
+module.exports = updateAndShowSnaphots

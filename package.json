@@ -63,8 +63,5 @@
       "CLI",
       "backtick"
     ]
-  },
-  "peerDependencies": {
-    "jest": "^25.1.0"
   }
 }
