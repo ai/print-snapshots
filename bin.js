@@ -3,8 +3,12 @@
 let chalk = require('chalk')
 
 let showSnapshots = require('./show-snapshots')
+let updateAndShowSnaphots = require('./update-and-show-snapshots')
+let watchAndShowSnaphots = require('./watch-and-show-snapshots')
 let showVersion = require('./show-version')
 let showHelp = require('./show-help')
+
+let cwd = process.cwd()
 
 function error (message) {
   process.stderr.write(chalk.red(message) + '\n')
@@ -16,17 +20,36 @@ function print (...lines) {
 
 async function run () {
   let arg = process.argv[2] || ''
+  let filter = process.argv[3] || ''
+
   if (arg === '--version') {
     showVersion(print)
-  } else if (arg === '--help') {
+    return
+  }
+
+  if (arg === '--help') {
     showHelp(print)
-  } else if (arg.startsWith('--')) {
+    return
+  }
+
+  if (arg === '--update') {
+    await showSnapshots(print, cwd, filter)
+    return
+  }
+
+  if (arg === '--watch') {
+    (await watchAndShowSnaphots(print, cwd, filter))
+      .on('error', err => error(err.stack || err))
+    return
+  }
+
+  if (arg.startsWith('--')) {
     error(`Unknown argument ${ arg }\n`)
     showHelp(print)
     process.exit(1)
-  } else {
-    await showSnapshots(print, process.cwd(), arg)
   }
+
+  await updateAndShowSnaphots(print, cwd, arg)
 }
 
 run().catch(e => {
