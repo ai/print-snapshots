@@ -9,10 +9,9 @@ module.exports = function showHelp (print) {
     'Show Jest snapshots of current project',
     '',
     b('Arguments:'),
-    '  ' + y('--version') + '   Show version',
-    '  ' + y('--help') + '      Show this message',
-    '  ' + y('--update') + '    Update snapshots and show them',
-    '  ' + y('--watch') + '     Watch for changes of a project\'s *.js files,' +
-    'update snaphots and show them'
+    '  ' + y('--version') + '  Show version',
+    '  ' + y('--help') + '     Show this message',
+    '  ' + y('--update') + '   Update snapshots and show them',
+    '  ' + y('--watch') + '    Run update on changes in *.js files'
   )
 }
