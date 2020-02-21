@@ -6,7 +6,7 @@ let fs = require('fs')
 
 let readFile = promisify(fs.readFile)
 
-module.exports = async function showSnapshots (print, cwd, filter) {
+module.exports = async function show (print, cwd, filter) {
   let snaps = await globby('**/*.snap', {
     cwd, ignore: ['node_modules']
   })

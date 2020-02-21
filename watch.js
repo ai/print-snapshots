@@ -4,9 +4,9 @@ let chokidar = require('chokidar')
 let pkgUp = require('pkg-up')
 let parseGitignore = require('parse-gitignore')
 
-let updateAndShowSnaphots = require('./update-and-show-snapshots')
+let update = require('./update')
 
-async function watchAndShowSnaphots (print, error, cwd, filter) {
+module.exports = async function watch (print, error, cwd, filter) {
   let ignored = ['.git', 'node_modules']
 
   let rootPath = path.dirname(await pkgUp())
@@ -26,8 +26,6 @@ async function watchAndShowSnaphots (print, error, cwd, filter) {
   })
 
   watcher
-    .on('change', () => updateAndShowSnaphots(print, cwd, filter))
+    .on('change', () => update(print, cwd, filter))
     .on('error', err => error(err.stack || err))
 }
-
-module.exports = watchAndShowSnaphots

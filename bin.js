@@ -1,16 +1,15 @@
 #!/usr/bin/env node
 
+let parseArgs = require('command-line-args')
 let chalk = require('chalk')
-let argv = require('command-line-args')
 
-let showSnapshots = require('./show-snapshots')
-let updateAndShowSnaphots = require('./update-and-show-snapshots')
-let watchAndShowSnaphots = require('./watch-and-show-snapshots')
 let showVersion = require('./show-version')
 let showHelp = require('./show-help')
+let update = require('./update')
+let watch = require('./watch')
+let show = require('./show')
 
-let cwd = process.cwd()
-let argsSchema = [
+const ARGS_SCHEMA = [
   {
     name: 'version',
     type: Boolean
@@ -43,20 +42,11 @@ function print (...lines) {
 }
 
 async function run () {
-  try {
-    let args = argv(argsSchema)
+  let cwd = process.cwd()
 
-    if (args.version) {
-      showVersion(print)
-    } else if (args.help) {
-      showHelp(print)
-    } else if (args.update) {
-      await updateAndShowSnaphots(print, cwd, args.filter)
-    } else if (args.watch) {
-      await watchAndShowSnaphots(print, error, cwd, args.filter)
-    } else {
-      await showSnapshots(print, cwd, args.filter)
-    }
+  let args
+  try {
+    args = parseArgs(ARGS_SCHEMA)
   } catch (e) {
     if (e.name === 'UNKNOWN_OPTION') {
       error(`Unknown argument ${ e.optionName }\n`)
@@ -65,6 +55,18 @@ async function run () {
     } else {
       throw e
     }
+  }
+
+  if (args.version) {
+    showVersion(print)
+  } else if (args.help) {
+    showHelp(print)
+  } else if (args.update) {
+    await update(print, cwd, args.filter)
+  } else if (args.watch) {
+    await watch(print, error, cwd, args.filter)
+  } else {
+    await show(print, cwd, args.filter)
   }
 }
 
