@@ -10,6 +10,9 @@ module.exports = function showHelp (print) {
     '',
     b('Arguments:'),
     '  ' + y('--version') + '   Show version',
-    '  ' + y('--help') + '   Show this message'
+    '  ' + y('--help') + '      Show this message',
+    '  ' + y('--update') + '    Update snapshots and show them',
+    '  ' + y('--watch') + '     Watch for changes of a project\'s *.js files,' +
+    'update snaphots and show them'
   )
 }
