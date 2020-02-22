@@ -16,15 +16,18 @@ const ARGS_SCHEMA = [
   },
   {
     name: 'help',
-    type: Boolean
+    type: Boolean,
+    alias: 'h'
   },
   {
     name: 'update',
-    type: Boolean
+    type: Boolean,
+    alias: 'u'
   },
   {
     name: 'watch',
-    type: Boolean
+    type: Boolean,
+    alias: 'w'
   },
   {
     name: 'filter',
