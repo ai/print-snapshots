@@ -10,8 +10,13 @@ module.exports = async function update (print, cwd, filter) {
     cwd, stdio: 'inherit'
   })
 
-  spawned.on('exit', () => {
-    print('')
-    show(print, cwd, filter)
+  await new Promise(resolve => {
+    spawned.on('exit', exitCode => {
+      if (exitCode === 0) {
+        print('')
+        show(print, cwd, filter)
+      }
+      resolve()
+    })
   })
 }
