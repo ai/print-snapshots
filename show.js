@@ -26,12 +26,7 @@ module.exports = async function show (print, cwd, filter) {
           .replace(/"\s*`;\s*$/, '')
           .split(/`] = `\s*"?/)
         let title = `${ tests[idx] } ${ name }`
-        if (tests[idx].includes('create-reporter')) {
-          if (body[0] === '{') return
-          title = title.replace(/ 2$/, '')
-        } else {
-          title = title.replace(/ 1$/, '')
-        }
+          .replace(/ 1$/, '')
         print(chalk.gray(`${ title }:`))
         print(body.replace(/\\\\"/g, '"').replace(/\\`/g, '`'))
       })
