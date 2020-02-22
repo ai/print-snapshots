@@ -1,6 +1,11 @@
 # Change Log
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## 0.3
+* Run only tests with snapshots in `--update` (by Oleg Levshin).
+* Wait for the end of previous update in `--watch`.
+* Add shortcut aliases.
+
 ## 0.2
 * Add `--update` mode (by Oleg Levshin).
 * Add `--watch` mode (by Oleg Levshin).
