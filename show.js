@@ -1,21 +1,14 @@
 let { promisify } = require('util')
-let { join, sep } = require('path')
-let globby = require('globby')
+let { join } = require('path')
 let chalk = require('chalk')
 let fs = require('fs')
+
+let find = require('./find')
 
 let readFile = promisify(fs.readFile)
 
 module.exports = async function show (print, cwd, filter) {
-  let snaps = await globby('**/*.snap', {
-    cwd, ignore: ['node_modules']
-  })
-
-  if (snaps.length === 0) {
-    let err = Error('Snapshots were not found')
-    err.own = true
-    throw err
-  }
+  let { snaps, tests } = await find(cwd)
 
   let results = { }
   await Promise.all(snaps.map(async file => {
@@ -23,19 +16,7 @@ module.exports = async function show (print, cwd, filter) {
     results[file] = content.toString()
   }))
 
-  snaps.sort().reverse().forEach(file => {
-    let testExt
-    let fileExt
-    let test = file
-      .replace(
-        /(\.(spec|test))?(\.([jt]sx?))\.snap$/,
-        (match, p1, p2, p3) => {
-          testExt = p1
-          fileExt = p3
-          return ''
-        }
-      )
-      .replace('__snapshots__' + sep, '')
+  snaps.forEach((file, idx) => {
     results[file].split('exports[`')
       .filter(str => !str.startsWith('// '))
       .filter(str => !filter || str.includes(filter))
@@ -44,8 +25,8 @@ module.exports = async function show (print, cwd, filter) {
         let [name, body] = str
           .replace(/"\s*`;\s*$/, '')
           .split(/`] = `\s*"?/)
-        let title = `${ test }${ testExt || '' }${ fileExt } ${ name }`
-        if (test === 'create-reporter') {
+        let title = `${ tests[idx] } ${ name }`
+        if (tests[idx].includes('create-reporter')) {
           if (body[0] === '{') return
           title = title.replace(/ 2$/, '')
         } else {
