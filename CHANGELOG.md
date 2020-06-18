@@ -1,6 +1,9 @@
 # Change Log
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## 0.3.1
+* Reduce dependencies.
+
 ## 0.3
 * Run only tests with snapshots in `--update` (by Oleg Levshin).
 * Wait for the end of previous update in `--watch`.
