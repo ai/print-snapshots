@@ -1,6 +1,6 @@
 let { promisify } = require('util')
 let { join } = require('path')
-let chalk = require('chalk')
+let kleur = require('kleur')
 let fs = require('fs')
 
 let find = require('./find')
@@ -27,7 +27,7 @@ module.exports = async function show (print, cwd, filter) {
         if (str.trim().length === 0) return
         let [name, body] = str.replace(/"\s*`;\s*$/, '').split(/`] = `\s*"?/)
         let title = `${tests[idx]} ${name}`.replace(/ 1$/, '')
-        print(chalk.gray(`${title}:`))
+        print(kleur.gray(`${title}:`))
         print(body.replace(/\\\\"/g, '"').replace(/\\`/g, '`'))
       })
   })
