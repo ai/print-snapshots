@@ -7,7 +7,8 @@ module.exports = async function update (print, cwd, filter) {
   let { tests } = await find(cwd)
 
   let spawned = spawn('npx', ['jest', '--no-install', '-u', ...tests], {
-    cwd, stdio: 'inherit'
+    cwd,
+    stdio: 'inherit'
   })
 
   await new Promise(resolve => {

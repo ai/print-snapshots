@@ -21,22 +21,28 @@ module.exports = async function watch (print, error, cwd, filter) {
   let ignored = ['.git', 'node_modules']
 
   let rootPath = path.dirname(await pkgUp())
-  let gitignorePath = `${ rootPath }/.gitignore`
+  let gitignorePath = `${rootPath}/.gitignore`
 
   if (fs.existsSync(gitignorePath)) {
-    ignored = [...new Set([
-      ...ignored,
-      ...parseGitignore(fs.readFileSync(gitignorePath)).map(
-        p => /\/$/.test(p) ? p.replace(/\/$/, '') : p
-      )
-    ])]
+    ignored = [
+      ...new Set([
+        ...ignored,
+        ...parseGitignore(fs.readFileSync(gitignorePath)).map(p =>
+          /\/$/.test(p) ? p.replace(/\/$/, '') : p
+        )
+      ])
+    ]
   }
 
   let watcher = chokidar.watch('**/*.js', {
-    cwd, ignored
+    cwd,
+    ignored
   })
 
   watcher
-    .on('change', throttle(() => update(print, cwd, filter)))
+    .on(
+      'change',
+      throttle(() => update(print, cwd, filter))
+    )
     .on('error', err => error(err.stack || err))
 }

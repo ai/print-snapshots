@@ -3,7 +3,8 @@ let globby = require('globby')
 
 module.exports = async function find (cwd) {
   let files = await globby('**/*.snap', {
-    cwd, ignore: ['node_modules']
+    cwd,
+    ignore: ['node_modules']
   })
 
   if (files.length === 0) {
@@ -13,8 +14,9 @@ module.exports = async function find (cwd) {
   }
 
   let snaps = files.sort().reverse()
-  let tests = snaps
-    .map(snap => snap.replace(/\.snap$/, '').replace('__snapshots__' + sep, ''))
+  let tests = snaps.map(snap =>
+    snap.replace(/\.snap$/, '').replace('__snapshots__' + sep, '')
+  )
 
   return {
     snaps,

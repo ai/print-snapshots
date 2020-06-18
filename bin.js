@@ -52,7 +52,7 @@ async function run () {
     args = parseArgs(ARGS_SCHEMA)
   } catch (e) {
     if (e.name === 'UNKNOWN_OPTION') {
-      error(`Unknown argument ${ e.optionName }\n`)
+      error(`Unknown argument ${e.optionName}\n`)
       showHelp(print)
       process.exit(1)
     } else {
