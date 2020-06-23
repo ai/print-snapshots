@@ -1,7 +1,7 @@
-let kleur = require('kleur')
+let { bold } = require('colorette')
 
 let pkg = require('./package.json')
 
 module.exports = function showVersion (print) {
-  print(`print-shapshots ${kleur.bold(pkg.version)}`)
+  print(`print-shapshots ${bold(pkg.version)}`)
 }

@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 let parseArgs = require('command-line-args')
-let kleur = require('kleur')
+let { red } = require('colorette')
 
 let showVersion = require('./show-version')
 let showHelp = require('./show-help')
@@ -37,7 +37,7 @@ const ARGS_SCHEMA = [
 ]
 
 function error (message) {
-  process.stderr.write(kleur.red(message) + '\n')
+  process.stderr.write(red(message) + '\n')
 }
 
 function print (...lines) {
