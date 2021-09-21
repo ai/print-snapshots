@@ -1,6 +1,10 @@
 # Change Log
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## 0.4
+* Removed Node.js 10 and 8 support.
+* Reduced dependencies.
+
 ## 0.3.2
 * Replace color output library.
 
