@@ -1,6 +1,5 @@
 #!/usr/bin/env node
 
-import parseArgs from 'command-line-args'
 import { red } from 'nanocolors'
 
 import { showVersion } from './show-version.js'
@@ -8,33 +7,6 @@ import { showHelp } from './show-help.js'
 import { update } from './update.js'
 import { watch } from './watch.js'
 import { show } from './show.js'
-
-const ARGS_SCHEMA = [
-  {
-    name: 'version',
-    type: Boolean
-  },
-  {
-    name: 'help',
-    type: Boolean,
-    alias: 'h'
-  },
-  {
-    name: 'update',
-    type: Boolean,
-    alias: 'u'
-  },
-  {
-    name: 'watch',
-    type: Boolean,
-    alias: 'w'
-  },
-  {
-    name: 'filter',
-    type: String,
-    defaultOption: true
-  }
-]
 
 function error(message) {
   process.stderr.write(red(message) + '\n')
@@ -47,16 +19,24 @@ function print(...lines) {
 async function run() {
   let cwd = process.cwd()
 
-  let args
-  try {
-    args = parseArgs(ARGS_SCHEMA)
-  } catch (e) {
-    if (e.name === 'UNKNOWN_OPTION') {
-      error(`Unknown argument ${e.optionName}\n`)
+  let args = {}
+
+  for (let i = 2; i < process.argv.length; i++) {
+    let arg = process.argv[i]
+    if (arg === '--version') {
+      args.version = true
+    } else if (arg === '--help' || arg === '-h') {
+      args.help = true
+    } else if (arg === '--update' || arg === '-u') {
+      args.update = true
+    } else if (arg === '--watch' || arg === '-w') {
+      args.watch = true
+    } else if (!arg.startsWith('-') && !args.filter) {
+      args.filter = arg
+    } else {
+      error(`Unknown argument ${arg}\n`)
       showHelp(print)
       process.exit(1)
-    } else {
-      throw e
     }
   }
 

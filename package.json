@@ -17,7 +17,6 @@
   },
   "dependencies": {
     "chokidar": "^3.5.2",
-    "command-line-args": "^5.2.0",
     "globby": "^11.0.1",
     "nanocolors": "^0.1.0",
     "parse-gitignore": "^1.0.1"
