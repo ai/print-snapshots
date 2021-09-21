@@ -1,7 +1,7 @@
-let { sep } = require('path')
-let globby = require('globby')
+import { sep } from 'path'
+import globby from 'globby'
 
-module.exports = async function find(cwd) {
+export async function find(cwd) {
   let files = await globby('**/*.snap', {
     cwd,
     ignore: ['node_modules']
@@ -18,8 +18,5 @@ module.exports = async function find(cwd) {
     snap.replace(/\.snap$/, '').replace('__snapshots__' + sep, '')
   )
 
-  return {
-    snaps,
-    tests
-  }
+  return { snaps, tests }
 }

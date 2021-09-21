@@ -9,8 +9,9 @@
   ],
   "bin": "./bin.js",
   "engines": {
-    "node": ">=8.0.0"
+    "node": "^12.0.0 || ^14.0.0 || >=16.0.0"
   },
+  "type": "module",
   "scripts": {
     "test": "eslint . && yaspeller *.md"
   },
@@ -27,6 +28,8 @@
   "repository": "ai/print-snapshots",
   "devDependencies": {
     "@logux/eslint-config": "^45.4.8",
+    "@typescript-eslint/eslint-plugin": "^4.31.2",
+    "@typescript-eslint/parser": "^4.30.0",
     "clean-publish": "^2.2.0",
     "eslint": "^7.32.0",
     "eslint-config-standard": "^16.0.3",
@@ -44,7 +47,7 @@
     "yaspeller": "^7.0.0"
   },
   "eslintConfig": {
-    "extends": "@logux/eslint-config"
+    "extends": "@logux/eslint-config/esm"
   },
   "lint-staged": {
     "*.md": "yaspeller",

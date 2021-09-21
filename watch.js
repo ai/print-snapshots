@@ -1,10 +1,10 @@
-let fs = require('fs')
-let path = require('path')
-let chokidar = require('chokidar')
-let pkgUp = require('pkg-up')
-let parseGitignore = require('parse-gitignore')
+import { existsSync, readFileSync } from 'fs'
+import parseGitignore from 'parse-gitignore'
+import { dirname } from 'path'
+import chokidar from 'chokidar'
+import pkgUp from 'pkg-up'
 
-let update = require('./update')
+import { update } from './update.js'
 
 function throttle(fn) {
   let next, running
@@ -17,17 +17,17 @@ function throttle(fn) {
   }
 }
 
-module.exports = async function watch(print, error, cwd, filter) {
+export async function watch(print, error, cwd, filter) {
   let ignored = ['.git', 'node_modules']
 
-  let rootPath = path.dirname(await pkgUp())
+  let rootPath = dirname(await pkgUp())
   let gitignorePath = `${rootPath}/.gitignore`
 
-  if (fs.existsSync(gitignorePath)) {
+  if (existsSync(gitignorePath)) {
     ignored = [
       ...new Set([
         ...ignored,
-        ...parseGitignore(fs.readFileSync(gitignorePath)).map(p =>
+        ...parseGitignore(readFileSync(gitignorePath)).map(p =>
           /\/$/.test(p) ? p.replace(/\/$/, '') : p
         )
       ])

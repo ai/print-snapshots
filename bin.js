@@ -1,13 +1,13 @@
 #!/usr/bin/env node
 
-let parseArgs = require('command-line-args')
-let { red } = require('colorette')
+import parseArgs from 'command-line-args'
+import { red } from 'colorette'
 
-let showVersion = require('./show-version')
-let showHelp = require('./show-help')
-let update = require('./update')
-let watch = require('./watch')
-let show = require('./show')
+import { showVersion } from './show-version.js'
+import { showHelp } from './show-help.js'
+import { update } from './update.js'
+import { watch } from './watch.js'
+import { show } from './show.js'
 
 const ARGS_SCHEMA = [
   {

@@ -1,9 +1,9 @@
-let { spawn } = require('child_process')
+import { spawn } from 'child_process'
 
-let find = require('./find')
-let show = require('./show')
+import { find } from './find.js'
+import { show } from './show.js'
 
-module.exports = async function update(print, cwd, filter) {
+export async function update(print, cwd, filter) {
   let { tests } = await find(cwd)
 
   let spawned = spawn('npx', ['jest', '--no-install', '-u', ...tests], {

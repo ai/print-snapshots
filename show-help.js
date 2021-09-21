@@ -1,6 +1,6 @@
-let { yellow: y, bold: b } = require('colorette')
+import { yellow as y, bold as b } from 'colorette'
 
-module.exports = function showHelp(print) {
+export function showHelp(print) {
   print(
     b('Usage: ') + 'npx print-shapshots [FILTER]',
     'Show Jest snapshots of current project',

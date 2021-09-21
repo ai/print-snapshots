@@ -1,13 +1,10 @@
-let { promisify } = require('util')
-let { gray } = require('colorette')
-let { join } = require('path')
-let fs = require('fs')
+import { readFile } from 'fs/promises'
+import { gray } from 'colorette'
+import { join } from 'path'
 
-let find = require('./find')
+import { find } from './find.js'
 
-let readFile = promisify(fs.readFile)
-
-module.exports = async function show(print, cwd, filter) {
+export async function show(print, cwd, filter) {
   let { snaps, tests } = await find(cwd)
 
   let results = {}
