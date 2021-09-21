@@ -1,8 +1,8 @@
 import { sep } from 'path'
-import globby from 'globby'
+import glob from 'fast-glob'
 
 export async function find(cwd) {
-  let files = await globby('**/*.snap', {
+  let files = await glob('**/*.snap', {
     cwd,
     ignore: ['node_modules']
   })
