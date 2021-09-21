@@ -36,15 +36,15 @@ const ARGS_SCHEMA = [
   }
 ]
 
-function error (message) {
+function error(message) {
   process.stderr.write(red(message) + '\n')
 }
 
-function print (...lines) {
+function print(...lines) {
   process.stdout.write(lines.join('\n') + '\n')
 }
 
-async function run () {
+async function run() {
   let cwd = process.cwd()
 
   let args

@@ -1,6 +1,6 @@
 let { yellow: y, bold: b } = require('colorette')
 
-module.exports = function showHelp (print) {
+module.exports = function showHelp(print) {
   print(
     b('Usage: ') + 'npx print-shapshots [FILTER]',
     'Show Jest snapshots of current project',

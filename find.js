@@ -1,7 +1,7 @@
 let { sep } = require('path')
 let globby = require('globby')
 
-module.exports = async function find (cwd) {
+module.exports = async function find(cwd) {
   let files = await globby('**/*.snap', {
     cwd,
     ignore: ['node_modules']

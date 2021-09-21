@@ -7,7 +7,7 @@ let find = require('./find')
 
 let readFile = promisify(fs.readFile)
 
-module.exports = async function show (print, cwd, filter) {
+module.exports = async function show(print, cwd, filter) {
   let { snaps, tests } = await find(cwd)
 
   let results = {}

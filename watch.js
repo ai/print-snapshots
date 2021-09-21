@@ -6,7 +6,7 @@ let parseGitignore = require('parse-gitignore')
 
 let update = require('./update')
 
-function throttle (fn) {
+function throttle(fn) {
   let next, running
   return () => {
     clearTimeout(next)
@@ -17,7 +17,7 @@ function throttle (fn) {
   }
 }
 
-module.exports = async function watch (print, error, cwd, filter) {
+module.exports = async function watch(print, error, cwd, filter) {
   let ignored = ['.git', 'node_modules']
 
   let rootPath = path.dirname(await pkgUp())

@@ -39,8 +39,9 @@
     "eslint-plugin-security": "^1.4.0",
     "eslint-plugin-standard": "^4.0.1",
     "eslint-plugin-unicorn": "^20.1.0",
-    "husky": "^4.2.5",
-    "lint-staged": "^10.2.11",
+    "lint-staged": "^11.1.2",
+    "prettier": "^2.4.1",
+    "simple-git-hooks": "^2.6.1",
     "typescript": "^3.9.5",
     "yaspeller": "^7.0.0"
   },
@@ -49,12 +50,21 @@
   },
   "lint-staged": {
     "*.md": "yaspeller",
-    "*.js": "eslint"
+    "*.js": [
+      "prettier --write",
+      "eslint --fix"
+    ]
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
+  "prettier": {
+    "arrowParens": "avoid",
+    "jsxSingleQuote": false,
+    "quoteProps": "consistent",
+    "semi": false,
+    "singleQuote": true,
+    "trailingComma": "none"
+  },
+  "simple-git-hooks": {
+    "pre-commit": "npx lint-staged"
   },
   "yaspeller": {
     "lang": "en",
