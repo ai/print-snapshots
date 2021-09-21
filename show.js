@@ -1,5 +1,5 @@
 import { readFile } from 'fs/promises'
-import { gray } from 'colorette'
+import { gray } from 'nanocolors'
 import { join } from 'path'
 
 import { find } from './find.js'

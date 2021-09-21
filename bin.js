@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 import parseArgs from 'command-line-args'
-import { red } from 'colorette'
+import { red } from 'nanocolors'
 
 import { showVersion } from './show-version.js'
 import { showHelp } from './show-help.js'
