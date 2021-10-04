@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import { red } from 'nanocolors'
+import pico from 'picocolors'
 
 import { showVersion } from './show-version.js'
 import { showHelp } from './show-help.js'
@@ -9,7 +9,7 @@ import { watch } from './watch.js'
 import { show } from './show.js'
 
 function error(message) {
-  process.stderr.write(red(message) + '\n')
+  process.stderr.write(pico.red(message) + '\n')
 }
 
 function print(...lines) {

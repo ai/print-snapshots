@@ -1,6 +1,6 @@
 import { readFile } from 'fs/promises'
-import { gray } from 'nanocolors'
 import { join } from 'path'
+import pico from 'picocolors'
 
 import { find } from './find.js'
 
@@ -24,7 +24,7 @@ export async function show(print, cwd, filter) {
         if (str.trim().length === 0) return
         let [name, body] = str.replace(/"\s*`;\s*$/, '').split(/`] = `\s*"?/)
         let title = `${tests[idx]} ${name}`.replace(/ 1$/, '')
-        print(gray(`${title}:`))
+        print(pico.gray(`${title}:`))
         print(body.replace(/\\\\"/g, '"').replace(/\\`/g, '`'))
       })
   })
