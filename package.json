@@ -1,6 +1,6 @@
 {
   "name": "print-snapshots",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "Print Jest snapshots to check CLI output of your tool",
   "keywords": [
     "jest",
